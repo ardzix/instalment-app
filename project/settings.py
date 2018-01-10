@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.bacends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'land_installment',
         'USER': 'postgres',
         'PASSWORD': 'asdf1234',
@@ -154,4 +154,4 @@ COMPRESS_PRECOMPILERS = (
 )
 
 
-FILE_FOLDER = 'files'
+FILE_FOLDER = '/files'

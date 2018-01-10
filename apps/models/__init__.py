@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Thursday, 11th January 2018 12:32:45 am
+# Last Modified: Thursday, 11th January 2018 1:15:36 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -122,8 +122,8 @@ class Purchase(BaseModelGeneric):
         return "%s - %s" % (self.customer.__unicode__(), self.volume.__unicode__())
 
     class Meta:
-        verbose_name = "Berkas"
-        verbose_name_plural = "Berkas"
+        verbose_name = "Pembelian"
+        verbose_name_plural = "Pembelian"
 
 
 class Installment(BaseModelGeneric):
@@ -134,7 +134,7 @@ class Installment(BaseModelGeneric):
     minus = models.PositiveIntegerField(default=0)
         
     def __unicode__(self):
-        return "%s/%s - %s" % (self.order, self.purchase.installment_total(), self.purchase.__unicode__())
+        return "%s/%s - %s" % (self.order, self.purchase.installment_total, self.purchase.__unicode__())
 
     class Meta:
         verbose_name = "Cicilan"
@@ -143,9 +143,9 @@ class Installment(BaseModelGeneric):
 class Finance(BaseModelGeneric):
     description = models.TextField()
     value = models.IntegerField(default=0)
-    content_type = models.ForeignKey(ContentType)
-    content_model = models.CharField(max_length=100)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    content_model = models.CharField(max_length=100, blank=True, null=True)
+    object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
     
     def __unicode__(self):
