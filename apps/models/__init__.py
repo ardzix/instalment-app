@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Thursday, 11th January 2018 1:15:36 am
+# Last Modified: Thursday, 11th January 2018 1:28:26 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -28,13 +28,13 @@ from django.contrib.contenttypes.models import ContentType
 
 # Create your models here.
 class Customer(BaseModelUnique):
-    gender = models.PositiveIntegerField(choices=GENDER_CHOICES, default=3)
-    id_num = models.CharField(max_length=25)
-    phone = models.CharField(max_length=25)
-    birthday = models.DateField()
-    birthplace = models.CharField(max_length=100)
-    address = models.TextField(blank=True, null=True)
-    is_verified = models.BooleanField(default=False)
+    gender = models.PositiveIntegerField(choices=GENDER_CHOICES, default=3, verbose_name="Nama Tampilan")
+    id_num = models.CharField(max_length=25, verbose_name="No ID (KTP/SIM)")
+    phone = models.CharField(max_length=25, verbose_name="No Telp")
+    birthday = models.DateField(verbose_name="Tanggal Lahir")
+    birthplace = models.CharField(max_length=100, verbose_name="Tempat Lahir")
+    address = models.TextField(blank=True, null=True, verbose_name="Alamat")
+    is_verified = models.BooleanField(default=False, verbose_name="Terverifikasi")
 
     def __unicode__(self):
         return "%s %s" % (self.created_by.first_name, self.created_by.last_name)
@@ -45,9 +45,9 @@ class Customer(BaseModelUnique):
 
 
 class Facility(BaseModelGeneric):
-    display_name = models.CharField(max_length=100)
-    short_name = models.SlugField(max_length=100)
-    description = models.TextField(blank=True, null=True)
+    display_name = models.CharField(max_length=100, verbose_name="Nama Tampilan")
+    short_name = models.SlugField(max_length=100, verbose_name="Slug")
+    description = models.TextField(blank=True, null=True, verbose_name="Keterangan")
 
     def __unicode__(self):
         return self.display_name
@@ -58,11 +58,11 @@ class Facility(BaseModelGeneric):
 
 
 class Volume(BaseModelGeneric):
-    display_name = models.CharField(max_length=100)
-    short_name = models.SlugField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    area_wide = models.PositiveIntegerField(default=0)
+    display_name = models.CharField(max_length=100, verbose_name="Nama Tampilan")
+    short_name = models.SlugField(max_length=100, verbose_name="Slug")
+    description = models.TextField(blank=True, null=True, verbose_name="Keterangan")
+    address = models.TextField(blank=True, null=True, verbose_name="Alamat")
+    area_wide = models.PositiveIntegerField(default=0, verbose_name="Luas Tanah")
 
     def __unicode__(self):
         return self.display_name
@@ -73,9 +73,9 @@ class Volume(BaseModelGeneric):
 
 
 class Witness(BaseModelGeneric):
-    fullname = models.CharField(max_length=100)
-    id_num = models.CharField(max_length=25)
-    address = models.TextField(blank=True, null=True)
+    fullname = models.CharField(max_length=100, verbose_name="Nama Lengkap")
+    id_num = models.CharField(max_length=25, verbose_name="No ID (KTP/SIM)")
+    address = models.TextField(blank=True, null=True, verbose_name="Alamat")
 
     def __unicode__(self):
         return self.fullname
@@ -86,8 +86,8 @@ class Witness(BaseModelGeneric):
 
 
 class File(BaseModelGeneric):
-    display_name = models.CharField(max_length=100)
-    short_name = models.SlugField(max_length=100)
+    display_name = models.CharField(max_length=100, verbose_name="Nama Tampinal")
+    short_name = models.SlugField(max_length=100, verbose_name="Slug")
     manager = models.FileField(blank=True, max_length=300, null=True, storage=STORAGE_FILE)
 
     def __unicode__(self):
@@ -99,24 +99,24 @@ class File(BaseModelGeneric):
 
 
 class Purchase(BaseModelGeneric):
-    customer = models.ForeignKey(Customer, related_name="%(app_label)s_%(class)s_customer")
+    customer = models.ForeignKey(Customer, related_name="%(app_label)s_%(class)s_customer", verbose_name="Pelanggan")
     volume = models.ForeignKey(Volume, related_name="%(app_label)s_%(class)s_volume")
-    witnesses = models.ManyToManyField(Witness, related_name="%(app_label)s_%(class)s_witnesses")
-    facilities = models.ManyToManyField(Facility, related_name="%(app_label)s_%(class)s_facilities")
-    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files")
-    reg_id = models.CharField(max_length=100)
-    reg_behalf = models.CharField(max_length=100)
-    area_wide = models.PositiveIntegerField(default=0)
-    north_perimeter = models.TextField(blank=True, null=True)
-    south_perimeter = models.TextField(blank=True, null=True)
-    east_perimeter = models.TextField(blank=True, null=True)
-    west_perimeter = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    down_payment = models.PositiveIntegerField(default=0)
-    installment_fee = models.PositiveIntegerField(default=0)
-    installment_total = models.PositiveIntegerField(default=0)
-    due_date = models.PositiveIntegerField(default=0)
-    notification_date = models.PositiveIntegerField(default=0)
+    witnesses = models.ManyToManyField(Witness, related_name="%(app_label)s_%(class)s_witnesses", verbose_name="Saksi")
+    facilities = models.ManyToManyField(Facility, related_name="%(app_label)s_%(class)s_facilities", verbose_name="Fasilitas")
+    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files", verbose_name="Berkas")
+    reg_id = models.CharField(max_length=100, verbose_name="No Induk Akte")
+    reg_behalf = models.CharField(max_length=100, verbose_name="Akte Atas Nama")
+    area_wide = models.PositiveIntegerField(default=0, verbose_name="Luas Tanah")
+    north_perimeter = models.TextField(blank=True, null=True, verbose_name="Batas Utara")
+    south_perimeter = models.TextField(blank=True, null=True, verbose_name="Batas Selatan")
+    east_perimeter = models.TextField(blank=True, null=True, verbose_name="Batas Timur")
+    west_perimeter = models.TextField(blank=True, null=True, verbose_name="Batas Barat")
+    address = models.TextField(blank=True, null=True, verbose_name="Alamat")
+    down_payment = models.PositiveIntegerField(default=0, verbose_name="Uang Muka")
+    installment_fee = models.PositiveIntegerField(default=0, verbose_name="Biaya Cicilan")
+    installment_total = models.PositiveIntegerField(default=0, verbose_name="Total Cicilan")
+    due_date = models.PositiveIntegerField(default=0, verbose_name="Jatuh Tempo")
+    notification_date = models.PositiveIntegerField(default=0, verbose_name="Tanggal Pengingat")
 
     def __unicode__(self):
         return "%s - %s" % (self.customer.__unicode__(), self.volume.__unicode__())
@@ -127,11 +127,11 @@ class Purchase(BaseModelGeneric):
 
 
 class Installment(BaseModelGeneric):
-    purchase = models.ForeignKey(Purchase, related_name="%(app_label)s_%(class)s_purchase")
-    customer = models.ForeignKey(Customer, related_name="%(app_label)s_%(class)s_customer")
-    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files")
-    order = models.PositiveIntegerField(default=0)
-    minus = models.PositiveIntegerField(default=0)
+    purchase = models.ForeignKey(Purchase, related_name="%(app_label)s_%(class)s_purchase", verbose_name="Pembelian")
+    customer = models.ForeignKey(Customer, related_name="%(app_label)s_%(class)s_customer", verbose_name="Pelanggan")
+    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files", verbose_name="Berkas")
+    order = models.PositiveIntegerField(default=0, verbose_name="Cicilan Ke")
+    minus = models.PositiveIntegerField(default=0, verbose_name="Kekurangan")
         
     def __unicode__(self):
         return "%s/%s - %s" % (self.order, self.purchase.installment_total, self.purchase.__unicode__())
@@ -140,9 +140,10 @@ class Installment(BaseModelGeneric):
         verbose_name = "Cicilan"
         verbose_name_plural = "Cicilan"
 
+
 class Finance(BaseModelGeneric):
-    description = models.TextField()
-    value = models.IntegerField(default=0)
+    description = models.TextField(verbose_name="Keterangan")
+    value = models.IntegerField(default=0, verbose_name="Nilai")
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     content_model = models.CharField(max_length=100, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
