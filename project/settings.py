@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.InstallmentConfig',
+
+    'compressor',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -75,11 +79,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.bacends.postgresql',
+        'NAME': 'land_installment',
+        'USER': 'postgres',
+        'PASSWORD': 'asdf1234',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -118,3 +125,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+# Media storage
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = [
+    # ...
+    ("media", MEDIA_ROOT),
+]
+
+# Compressor
+COMPRESS_ENABLED = True
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_OUTPUT_DIR = '/_/'
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/jsx', 'cat {infile} | %s/bin/babel --presets es2015,react > {outfile}' % os.path.dirname(BASE_DIR)),
+)
+
+
+FILE_FOLDER = 'files'
