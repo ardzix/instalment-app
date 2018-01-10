@@ -1,0 +1,49 @@
+<li class="treeview">
+    <a href="#"><i class="fa fa-home "></i><span>Dashboard</span></a>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:role' %}"><i class="fa fa-user "></i><span>Role</span></a>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:profile' %}"><i class="fa fa-users"></i><span>Profile</span></a>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:investor' %}"><i class="fa fa-user-secret"></i><span>Investor</span></a>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:brand' %}"><i class="fa fa-flag"></i><span>Brand</span></a>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:product' %}"><i class="fa fa-shopping-cart"></i><span>Product</span></a>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:stock' %}"><i class="fa fa-archive"></i><span>Stock</span></a>
+</li>
+<li class="treeview">
+    <a href="#">
+      <i class="fa fa-percent"></i> <span>Discount</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{% url 'core:discount' %}"><i class="fa fa-circle-o"></i> Discount</a></li>
+      <li><a href="{% url 'core:discount-product' %}"><i class="fa fa-circle-o"></i> Discount Product</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="{% url 'core:sale' %}"><i class="fa fa-dollar"></i><span>Sale</span></a>
+</li>
+<li class="treeview">
+    <a href="#">
+      <i class="fa fa-file-excel-o"></i> <span>Report</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{% url 'core:report' %}"><i class="fa fa-circle-o"></i> Report</a></li>
+      <li><a href="{% url 'core:cashback' %}"><i class="fa fa-circle-o"></i> Cashback</a></li>
+      <li><a href="{% url 'core:investor-download' %}"><i class="fa fa-circle-o"></i> Investor</a></li>
+    </ul>
+</li>

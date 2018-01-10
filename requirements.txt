@@ -1,0 +1,17 @@
+# Apps-
+Django==1.11.1
+psycopg2==2.7.1
+Pillow==4.1.1
+django_compressor==2.1.1
+django-libsass==0.7
+djangorestframework==3.6.3
+django-rest-swagger==2.1.2
+pytablewriter==0.27.1
+
+# Deploy
+Fabric==1.13.2
+supervisor==3.2.0
+uWSGI==2.0.12
+
+# 3rdparty
+django-appconf==1.0.2
