@@ -2,5 +2,5 @@
 *.DS_Store
 *.pyc
 *.DS_Store
-
+apps/migrations/*
 media/*
