@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:24:54 pm
-# Last Modified: Thursday, 11th January 2018 12:27:06 am
+# Last Modified: Thursday, 11th January 2018 1:29:55 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -19,3 +19,4 @@ from django.apps import AppConfig
 
 class InstallmentConfig(AppConfig):
     name = 'apps'
+    verbose_name = "Aplikasi"

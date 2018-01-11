@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>{% block title %}POS WKUK App{% endblock %}</title>
+  <title>{% block title %}Aplikasi Cicilan Tanah - Bumi Kusuma Asri{% endblock %}</title>
 
   {% block meta %}
   <!-- Tell the browser to be responsive to screen width -->
@@ -45,9 +45,9 @@
     <!-- Logo -->
     <a href="http://{{ request.get_host }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>W</b></span>
+      <span class="logo-mini"><b>BKA</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>POS WKUK App</b> Web Admin</span>
+      <span class="logo-lg"><b>Kavling Bumi Kusuma Asri</b> Web Admin</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -62,13 +62,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{% static 'backend/dist/img/wkuk.jpg' %}" class="user-image" id="right-top-userimage" alt="User Image">
+              <img src="{% static 'backend/dist/img/wkuk.png' %}" class="user-image" id="right-top-userimage" alt="User Image">
               <span class="hidden-xs">{{ request.user.username }}</span> &nbsp;<i class="fa fa-gears"></i>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{% static 'backend/dist/img/wkuk.jpg' %}" id="right-top-dropeddown-userimage" class="img-circle" alt="User Image">
+                <img src="{% static 'backend/dist/img/wkuk.png' %}" id="right-top-dropeddown-userimage" class="img-circle" alt="User Image">
 
                 <p>
                   {{request.user.first_name}} {{request.user.last_name}}
@@ -97,7 +97,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{% static 'backend/dist/img/wkuk.jpg' %}" id="avatar-image-sidebar" class="img-circle" alt="User Image">
+          <img src="{% static 'backend/dist/img/wkuk.png' %}" id="avatar-image-sidebar" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{request.user.first_name}} {{request.user.last_name}}</p>
@@ -126,7 +126,7 @@
         {% endblock %}
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{% url 'core:sale' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ request.base_url }}"><i class="fa fa-dashboard"></i> Home</a></li>
         {% block breadcumb %}
         {% endblock %}
       </ol>
@@ -146,7 +146,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    POS WKUK App, Yayasan Kubah Rahmatan - Template by <strong><a href="http://almsaeedstudio.com" target="blank">Almsaeed Studio</a></strong> - Engine by <strong><a href="#">RBT Corp</a></strong> ( <strong><a href="mailto:ardzix@hotmail.com">Arif Dzikrullah</a></strong></strong> )
+    Aplikasi Cicilan Tanah, Bumi Kusuma Asri - Template by <strong><a href="http://almsaeedstudio.com" target="blank">Almsaeed Studio</a></strong> - Engine by <strong><a href="http://ardz.xyz">Ardz & Co</a></strong> ( <strong><a href="mailto:ardzix@hotmail.com">Arif Dzikrullah</a></strong></strong> )
   </footer>
   {% endblock %}
 
