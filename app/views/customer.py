@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 1:01:02 pm
-# Last Modified: Thursday, 11th January 2018 1:03:46 pm
+# Last Modified: Thursday, 11th January 2018 3:34:37 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -16,7 +16,7 @@ from django.shortcuts import redirect, reverse, get_object_or_404
 from libs.view import ProtectedMixin
 from libs.datatable import Datatable
 from libs.json_response import JSONResponse
-from apps.models import Customer
+from app.models import Customer
 
 class CustomerView(ProtectedMixin, TemplateView):
     template_name = "customer/index.html"

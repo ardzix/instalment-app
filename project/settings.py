@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.InstallmentConfig',
+    'app.InstallmentConfig',
 
     'compressor',
     'sorl.thumbnail',
@@ -59,7 +59,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            '%s/templates' % BASE_DIR
+            '%s/templates' % BASE_DIR,
+            '%s/account/templates' % BASE_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
