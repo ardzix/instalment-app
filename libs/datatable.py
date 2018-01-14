@@ -40,6 +40,9 @@ class Datatable(object):
     posts = None
     error = False
     error_messages = None
+    search_lookup_defer = []
+    search_defer = []
+    search_query = []
 
     # When you instantiate a variable with this class, you need to provide:
     # - request   : the request needed to get url parameter sent by client
@@ -59,21 +62,24 @@ class Datatable(object):
         self.offset = int(request.GET.get("start",0))
         self.limit = int(request.GET.get("length",10)) + self.offset
 
+    def perform_query(self):
+        request = self.request
+        obj = self.obj
         # Get ordering parameter
         if not request.GET.get("order[0][dir]","") == "asc":
             self.ordering = "-"
             
         # Get search/filter value
-        filter_qry = request.GET.get('search[value]','')
+        search_query = request.GET.get('search[value]','')
         
         # If search/filter value not provided
-        if filter_qry == '':
+        if search_query == '':
             # We don't perform search
             self.posts = obj
             self.data['recordsFiltered'] = obj.count()
         else:
             # else, we perform search
-            search = self.search(filter_qry=filter_qry)
+            search = self.search(search_query=search_query)
             # If search returned none
             if search != None:
                 # Than it was error, so we need to perform search error
@@ -89,9 +95,9 @@ class Datatable(object):
         # Perform append
         self.append()
 
-
     # get data is called when you need data in this instance
     def get_data(self):
+        self.perform_query()
         # if there is an error in this instance
         if self.error:
             # then we return the error message
@@ -105,18 +111,28 @@ class Datatable(object):
         self.error = True
         self.error_messages = error_messages
 
-    # We make filter query from search value in this method
-    def search(self,filter_qry):
+    def search_lookup(self, lookup=[]):
+        self.search_lookup_defer = lookup
+
+    def search(self,search_query):
+        self.search_query = search_query
+            
+        # we check, is it searchable or not? searchable parameter sent by client in request url
+        # if it is searchable and not in lookup defer, we append it to search_defer
         search_defer = []
-        # for every defer in this instance
         for n in range(len(self.defer)):
-            # we check, is it searchable or not? searchable parameter sent by client in request url
             if self.request.GET.get('columns['+str(n)+'][searchable]','false') == 'true':
-                # if it is searchable, we append it to search defer list
-                search_defer.append(self.defer[n]+"__icontains")
+                if self.defer[n] not in self.search_lookup_defer:
+                    search_defer.append(self.defer[n]+"__icontains")
+        
+        self.search_defer = search_defer
+        self.perform_search()
+
+    # We make filter query from search value in this method
+    def perform_search(self):
 
         # We make filter queries from the defer
-        queries = [Q(**{f: filter_qry}) for f in search_defer]
+        queries = [Q(**{f: self.search_query}) for f in self.search_defer]
 
         # We instantiate a variable called QS from Q class
         qs = Q()
@@ -133,6 +149,7 @@ class Datatable(object):
             self.data['recordsFiltered'] = self.obj.filter(qs).count()
         # if we failed to try
         except Exception as e:
+            print str(e)
             # we sent an error response to client
             return JSONResponse({'error' : 'error in search parameter', 'error detail': str(e), 'suggestion' : 'Only enable varchar data type only for search'})
 

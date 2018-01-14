@@ -12,6 +12,7 @@ class LoginView(TemplateView):
         return self.render_to_response({})
 
     def post(self, request):
+        next = request.GET.get("next")
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(username=username, password=password)
@@ -21,9 +22,12 @@ class LoginView(TemplateView):
                 login(request, user)
                 print ("logged in")
 
-                return redirect(
-                    reverse("core:sale")
-                )
+                if next:
+                    return redirect(next)
+                else:
+                    return redirect(
+                        reverse("app:dashboard")
+                    )
             else:
                 messages.error(request, 'Account is not active. Please contact the administrator')
         else:

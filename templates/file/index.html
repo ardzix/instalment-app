@@ -1,12 +1,26 @@
+<!--
+
+Author: Arif Dzikrullah
+        ardzix@hotmail.com
+
+File Created: Sunday, 14th January 2018 3:30:36 pm
+Last Modified: Sunday, 14th January 2018 3:30:54 pm
+Modified By: Arif Dzikrullah (ardzix@hotmail.com)
+
+Give the best to the world
+Copyright - 2018 Ardz.Co
+-->
+
+
 {% extends "../layout/adminLTE2.html" %}
 {% load static compress %}
 
 {% block breadcumb %}
-<li class="active">Pelanggan</li>
+<li class="active">Berkas</li>
 {% endblock %}
 
 {% block content_title %}
-Pelanggan
+Berkas
 {% endblock %}
 
 {% block content %}
@@ -14,9 +28,9 @@ Pelanggan
         <div class="row">
           <div class="col-xs-12"><div class="box box-info">
               <div class="box-header">
-                <h3 class="box-title col-sm-3" >Pelanggan</h3>
+                <h3 class="box-title col-sm-3" >Berkas</h3>
                 <div class="btn-group pull-right">
-                  <button type="button" class="btn btn-instagram" onclick="window.location.replace('{% url 'app:customer-form' %}');"><i class="fa fa-pencil"></i>&nbsp;Create New</button>
+                  <button type="button" class="btn btn-instagram" onclick="window.location.replace('{% url 'app:volume-form' %}');"><i class="fa fa-pencil"></i>&nbsp;Create New</button>
                 </div>
               </row>
               </div>
@@ -27,9 +41,7 @@ Pelanggan
                     <tr>
                         <th>ID</th>
                         <th>Nama</th>
-                        <th>No ID (KTP/SIM)</th>
-                        <th>No Telp</th>
-                        <th>Terdaftar pada</th>
+                        <th>Dibuat pada</th>
                         <th></th>
                     </tr>
                   </thead>
@@ -78,8 +90,6 @@ $(function () {
       "processing": true,
       "serverSide": true,
       "columns": [
-          null,
-          null,
           null,
           null,
           {'searchable':false},

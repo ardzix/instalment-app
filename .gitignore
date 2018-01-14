@@ -2,6 +2,6 @@
 *.DS_Store
 *.pyc
 *.DS_Store
-apps/migrations/*
+app/migrations/*
 media/*
 project/settings.py

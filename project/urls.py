@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:23:33 pm
-# Last Modified: Thursday, 11th January 2018 3:30:13 pm
+# Last Modified: Thursday, 11th January 2018 3:47:09 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('app.urls', namespace='app')),
     url(r'^account/', include('account.urls', namespace='account')),
-    # url(r'^$', RedirectView.as_view(url='/app/installment')),
+    url(r'^$', RedirectView.as_view(url='/app/customer')),
 ]
