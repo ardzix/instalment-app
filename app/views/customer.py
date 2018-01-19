@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 1:01:02 pm
-# Last Modified: Sunday, 14th January 2018 4:10:08 pm
+# Last Modified: Friday, 19th January 2018 2:30:38 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -13,6 +13,7 @@
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.shortcuts import redirect, reverse, get_object_or_404
+from django.contrib.auth.models import User
 from libs.view import ProtectedMixin
 from libs.datatable import Datatable
 from libs.json_response import JSONResponse
@@ -43,5 +44,7 @@ class CustomerView(ProtectedMixin, TemplateView):
         defer = ['id62', 'created_by', 'id_num', 'phone', 'created_at']
 
         d = Datatable(request, qs, defer)
-        d.search_lookup(['created_by'])
+        # d.set_lookup_defer(['created_by'])
+        d.set_lookup_defer([{'field' : 'created_by', 'lookup_field' : 'created_by__first_name', 'model': Customer}])
+        
         return d.get_data()

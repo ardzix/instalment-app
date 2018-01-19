@@ -29,6 +29,7 @@ class Datatable(object):
     request = None
     obj = None
     defer = []
+    lookup_defer = []
     key = ""
     deff_button = True
     custom_button = []
@@ -40,8 +41,8 @@ class Datatable(object):
     posts = None
     error = False
     error_messages = None
-    search_lookup_defer = []
     search_defer = []
+    search_uid_defer = []
     search_query = []
 
     # When you instantiate a variable with this class, you need to provide:
@@ -106,13 +107,13 @@ class Datatable(object):
         # Finally we return the data on this instace
         return JSONResponse(self.data)
 
+    def set_lookup_defer(self, lookup=[]):
+        self.lookup_defer = lookup
+
     # Set error status true and give error message if there is no search result 
     def search_error(self,error_messages):
         self.error = True
         self.error_messages = error_messages
-
-    def search_lookup(self, lookup=[]):
-        self.search_lookup_defer = lookup
 
     def search(self,search_query):
         self.search_query = search_query
@@ -120,20 +121,38 @@ class Datatable(object):
         # we check, is it searchable or not? searchable parameter sent by client in request url
         # if it is searchable and not in lookup defer, we append it to search_defer
         search_defer = []
+        u_id = []
         for n in range(len(self.defer)):
             if self.request.GET.get('columns['+str(n)+'][searchable]','false') == 'true':
-                if self.defer[n] not in self.search_lookup_defer:
+                if len(self.lookup_defer) > 0:
+                    cleaned_lookup_defer = []
+                    for ld in self.lookup_defer:
+                        if type(ld).__name__ == "dict":
+                            cleaned_lookup_defer.append(ld['field'])
+                        else:
+                            cleaned_lookup_defer.append(ld)
+                    if self.defer[n] not in cleaned_lookup_defer:
+                        search_defer.append(self.defer[n]+"__icontains")
+                    else:
+                        ld_index = cleaned_lookup_defer.index(self.defer[n])
+                        keyword = self.lookup_defer[ld_index]['lookup_field'] + "__icontains"
+                        kwargs = {
+                            keyword : self.search_query
+                        }
+                        u_id += list(self.lookup_defer[ld_index]['model'].objects.filter(**kwargs).values_list('id', flat=True))
+                else:
                     search_defer.append(self.defer[n]+"__icontains")
+                    
         
         self.search_defer = search_defer
+        self.search_uid_defer = u_id
         self.perform_search()
-
     # We make filter query from search value in this method
     def perform_search(self):
 
         # We make filter queries from the defer
         queries = [Q(**{f: self.search_query}) for f in self.search_defer]
-
+        queries.append(Q(**{"id__in": self.search_uid_defer}))
         # We instantiate a variable called QS from Q class
         qs = Q()
         # for every query in filter queries

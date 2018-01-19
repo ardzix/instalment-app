@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Thursday, 11th January 2018 1:28:26 am
+# Last Modified: Thursday, 18th January 2018 7:35:13 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -38,6 +38,9 @@ class Customer(BaseModelUnique):
 
     def __unicode__(self):
         return "%s %s" % (self.created_by.first_name, self.created_by.last_name)
+
+    def get_create_by(self):
+        return self.__unicode__()
 
     class Meta:
         verbose_name = "Pelanggan"
