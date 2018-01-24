@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:31:19 pm
-# Last Modified: Sunday, 14th January 2018 3:33:06 pm
+# Last Modified: Wednesday, 24th January 2018 10:45:14 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -42,7 +42,9 @@ class FileView(ProtectedMixin, TemplateView):
             deleted_at__isnull = True
         )
 
-        defer = ['id62', 'display_name', 'created_at']
+        defer = ['id62', 'display_name', 'manager', 'created_at']
 
         d = Datatable(request, qs, defer)
+        d.set_method_defer([{'origin':"manager",'method':"get_url"}])
+        
         return d.get_data()

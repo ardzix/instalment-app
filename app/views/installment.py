@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:38:34 pm
-# Last Modified: Sunday, 14th January 2018 3:39:35 pm
+# Last Modified: Wednesday, 24th January 2018 11:13:46 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -42,7 +42,10 @@ class InstallmentView(ProtectedMixin, TemplateView):
             deleted_at__isnull = True
         )
 
-        defer = ['id62', '__unicode__', 'created_at']
+        defer = ['id62', 'purchase', 'customer', 'order', 'created_at']
 
         d = Datatable(request, qs, defer)
+        d.set_method_defer([{'origin':"purchase",'method':"__unicode__"}])
+        d.set_lookup_defer(['volume__display_name', 'customer__created_by__first_name'])
+
         return d.get_data()

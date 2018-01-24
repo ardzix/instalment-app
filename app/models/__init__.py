@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Thursday, 18th January 2018 7:35:13 pm
+# Last Modified: Wednesday, 24th January 2018 10:41:24 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -95,6 +95,9 @@ class File(BaseModelGeneric):
 
     def __unicode__(self):
         return self.display_name
+
+    def get_url(self):
+        return self.manager.url
 
     class Meta:
         verbose_name = "Berkas"

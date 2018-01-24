@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 1:01:02 pm
-# Last Modified: Friday, 19th January 2018 2:30:38 pm
+# Last Modified: Wednesday, 24th January 2018 10:25:26 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -44,7 +44,6 @@ class CustomerView(ProtectedMixin, TemplateView):
         defer = ['id62', 'created_by', 'id_num', 'phone', 'created_at']
 
         d = Datatable(request, qs, defer)
-        # d.set_lookup_defer(['created_by'])
-        d.set_lookup_defer([{'field' : 'created_by', 'lookup_field' : 'created_by__first_name', 'model': Customer}])
+        d.set_lookup_defer(['created_by__first_name'])
         
         return d.get_data()

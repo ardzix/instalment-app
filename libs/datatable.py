@@ -44,6 +44,8 @@ class Datatable(object):
     search_defer = []
     search_uid_defer = []
     search_query = []
+    origin_field = []
+    model_method = []
 
     # When you instantiate a variable with this class, you need to provide:
     # - request   : the request needed to get url parameter sent by client
@@ -107,8 +109,25 @@ class Datatable(object):
         # Finally we return the data on this instace
         return JSONResponse(self.data)
 
+    def set_method_defer(self, method=[]):
+        for m in method:
+            self.origin_field.append(m['origin'])
+            self.model_method.append(m['method'])
+
     def set_lookup_defer(self, lookup=[]):
-        self.lookup_defer = lookup
+        lookup_dict_list = []
+        for l in lookup:
+            print l
+            l_dict = {"lookup_field":l}
+            splited_l = l.split("__")
+            field = ""
+            if len(splited_l) > 0:
+                l_dict['field'] = splited_l[0]
+                if len(self.obj) > 0:
+                    l_dict['model'] = self.obj[0].__class__
+                    lookup_dict_list.append(l_dict)
+
+        self.lookup_defer = lookup_dict_list
 
     # Set error status true and give error message if there is no search result 
     def search_error(self,error_messages):
@@ -186,7 +205,11 @@ class Datatable(object):
             # loop for every defer then
             for x in self.defer:
                 # get attribute of post result with defer as a key
-                attr = getattr(v, x)
+                if x in self.origin_field:
+                    of_index = self.origin_field.index(x)
+                    attr = getattr(v, self.model_method[of_index])
+                else:
+                    attr = getattr(v, x)
                 # if the attribute is a method
                 if type(attr) == types.MethodType:
                     # we convert the attribute velue then append it to result row

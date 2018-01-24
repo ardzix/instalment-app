@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 3:59:22 pm
-# Last Modified: Thursday, 11th January 2018 4:00:00 pm
+# Last Modified: Wednesday, 24th January 2018 10:28:17 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -42,7 +42,7 @@ class VolumeView(ProtectedMixin, TemplateView):
             deleted_at__isnull = True
         )
 
-        defer = ['id62', 'display_name', 'created_at']
+        defer = ['id62', 'display_name', 'address', 'area_wide', 'created_at']
 
         d = Datatable(request, qs, defer)
         return d.get_data()

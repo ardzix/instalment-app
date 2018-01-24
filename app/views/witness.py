@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:27:04 pm
-# Last Modified: Sunday, 14th January 2018 3:29:52 pm
+# Last Modified: Wednesday, 24th January 2018 10:30:42 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -42,7 +42,7 @@ class WitnessView(ProtectedMixin, TemplateView):
             deleted_at__isnull = True
         )
 
-        defer = ['id62', 'fullname', 'created_at']
+        defer = ['id62', 'fullname', 'id_num', 'address', 'created_at']
 
         d = Datatable(request, qs, defer)
         return d.get_data()

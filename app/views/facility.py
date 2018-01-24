@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 3:43:19 pm
-# Last Modified: Thursday, 11th January 2018 3:54:44 pm
+# Last Modified: Wednesday, 24th January 2018 10:26:03 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -41,7 +41,7 @@ class FacilityView(ProtectedMixin, TemplateView):
             deleted_at__isnull = True
         )
 
-        defer = ['id62', 'display_name', 'created_at']
+        defer = ['id62', 'display_name', 'description', 'created_at']
 
         d = Datatable(request, qs, defer)
         return d.get_data()
