@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 12:59:20 pm
-# Last Modified: Sunday, 14th January 2018 3:44:37 pm
+# Last Modified: Thursday, 25th January 2018 11:36:28 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -22,7 +22,7 @@ from app.views.finance import *
 
 urlpatterns = [
     url(r'^customer/$', CustomerView.as_view(), name='customer'),
-    url(r'^customer/form/$', CustomerView.as_view(), name='customer-form'),
+    url(r'^customer/form/$', CustomerFormView.as_view(), name='customer-form'),
 
     url(r'^facility/$', FacilityView.as_view(), name='facility'),
     url(r'^facility/form/$', FacilityView.as_view(), name='facility-form'),

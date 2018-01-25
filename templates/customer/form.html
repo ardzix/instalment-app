@@ -39,8 +39,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>{{form.profile.phone.label}}</label>
-                                    {{form.profile.phone}}
+                                    <label>{{form.customer.phone.label}}</label>
+                                    {{form.customer.phone}}
                                 </div>
                             </div>
                         </div>
@@ -63,14 +63,29 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group required">
-                                    <label>{{form.profile.gender.label}}</label>
-                                    {{form.profile.gender}}
+                                    <label>{{form.customer.gender.label}}</label>
+                                    {{form.customer.gender}}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>{{form.profile.roles.label}}</label>
-                                    {{form.profile.roles}}
+                                    <label>{{form.customer.id_num.label}}</label>
+                                    {{form.customer.id_num}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group required">
+                                    <label>{{form.customer.birthday.label}}</label>
+                                    {{form.customer.birthday}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{form.customer.birthplace.label}}</label>
+                                    {{form.customer.birthplace}}
                                 </div>
                             </div>
                         </div>
@@ -78,17 +93,29 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>{{form.profile.bio.label}}</label>
-                                    {{form.profile.bio}}
+                                    <label>{{form.customer.address.label}}</label>
+                                    {{form.customer.address}}
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>{{form.profile.is_verified.label}}</label>
-                                    {{form.profile.is_verified}}
+                                    <label>{{form.user.is_active.label}}</label>
+                                    {{form.user.is_active}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{form.user.is_staff.label}}</label>
+                                    {{form.user.is_staff}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{form.customer.is_verified.label}}</label>
+                                    {{form.customer.is_verified}}
                                 </div>
                             </div>
                         </div>
@@ -155,10 +182,14 @@
                
 <script>
     var simplemde = new SimpleMDE({ 
-        element: document.getElementById("{{form.profile.bio.auto_id}}")
+        element: document.getElementById("{{form.customer.address.auto_id}}")
         })
     
     $(".select2").select2();
+
+    $('#{{form.customer.birthday.auto_id}}').datepicker({
+        autoclose: true
+      });
 </script>
 
 {% endblock %}

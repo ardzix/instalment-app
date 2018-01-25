@@ -158,3 +158,15 @@ COMPRESS_PRECOMPILERS = (
 
 
 FILE_FOLDER = '/files'
+
+
+EXCLUDE_FORM_FIELDS = (
+    "id", "id62", "site", "nonce",
+    "created_at", "created_at_timestamp", "created_by",
+    "updated_at", "updated_at_timestamp", "updated_by",
+    "published_at", "published_at_timestamp", "published_by",
+    "unpublished_at", "unpublished_at_timestamp", "unpublished_by",
+    "approved_at", "approved_at_timestamp", "approved_by",
+    "unapproved_at", "unapproved_at_timestamp", "unapproved_by",
+    "deleted_at", "deleted_at_timestamp", "deleted_by",
+)

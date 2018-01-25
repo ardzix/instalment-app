@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 1:01:02 pm
-# Last Modified: Wednesday, 24th January 2018 10:25:26 am
+# Last Modified: Thursday, 25th January 2018 11:55:45 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -18,6 +18,8 @@ from libs.view import ProtectedMixin
 from libs.datatable import Datatable
 from libs.json_response import JSONResponse
 from app.models import Customer
+from app.forms import CustomerForm, UserForm
+from datetime import datetime
 
 class CustomerView(ProtectedMixin, TemplateView):
     template_name = "customer/index.html"
@@ -47,3 +49,59 @@ class CustomerView(ProtectedMixin, TemplateView):
         d.set_lookup_defer(['created_by__first_name'])
         
         return d.get_data()
+
+
+class CustomerFormView(ProtectedMixin, TemplateView):
+    template_name = "customer/form.html"
+    
+    def get(self, request):
+        edit = request.GET.get("edit")
+
+        if edit:
+            c = Customer.objects.get(id62=edit)
+            c_form = CustomerForm(instance=c)
+            u_form = UserForm(instance=User.objects.get(id=c.created_by_id))
+        else:
+            c_form = CustomerForm()
+            u_form = UserForm()
+
+        return self.render_to_response({"form":{'user':u_form, 'customer':c_form}})
+
+    def post(self, request):
+        edit = request.GET.get("edit")
+
+        if edit:
+            c = Customer.objects.get(id62=edit)
+            c_form = CustomerForm(request.POST, instance=c)
+            u_form = UserForm(request.POST, instance=User.objects.get(id=c.created_by_id))
+        else:
+            c_form = CustomerForm(request.POST)
+            u_form = UserForm(request.POST)
+
+        if u_form.is_valid():
+            user = u_form.save(commit=False)
+            user.date_joined = datetime.now()
+            user.set_password(request.POST.get("password"))
+            user.is_staff = False
+            user.is_active = True
+
+            if c_form.is_valid():
+                user.save()                
+                customer = c_form.save(commit=False)
+                if edit:
+                    customer.updated_by = request.user
+                else:
+                    customer.created_by = user
+                customer.save()
+
+                messages.success(request, 'Customer (%s %s) has been saved.' % (user.first_name, user.last_name))
+                
+                return redirect(
+                    reverse("app:customer")
+                )
+            else:
+                print c_form.errors
+        else:
+            print u_form.errors
+
+        return self.render_to_response({"form":{'user':u_form, 'customer':c_form}})
