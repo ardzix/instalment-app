@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 3:59:22 pm
-# Last Modified: Wednesday, 24th January 2018 10:28:17 am
+# Last Modified: Wednesday, 7th February 2018 8:12:19 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -19,6 +19,7 @@ from libs.view import ProtectedMixin
 from libs.datatable import Datatable
 from libs.json_response import JSONResponse
 from app.models import Volume
+from app.forms import VolumeForm
 
 class VolumeView(ProtectedMixin, TemplateView):
     template_name = "volume/index.html"
@@ -46,3 +47,44 @@ class VolumeView(ProtectedMixin, TemplateView):
 
         d = Datatable(request, qs, defer)
         return d.get_data()
+
+
+class VolumeFormView(ProtectedMixin, TemplateView):
+    template_name = "volume/form.html"
+    
+    def get(self, request):
+        edit = request.GET.get("edit")
+
+        if edit:
+            instance = Volume.objects.get(id62=edit)
+            form = VolumeForm(instance=instance)
+        else:
+            form = VolumeForm()
+
+        return self.render_to_response({"form":form})
+
+    def post(self, request):
+        edit = request.GET.get("edit")
+
+        if edit:
+            instance = Volume.objects.get(id62=edit)
+            form = VolumeForm(request.POST, instance=instance)
+        else:
+            form = VolumeForm(request.POST)
+
+        if form.is_valid():
+            obj = form.save(commit=False)
+            if edit:
+                obj.updated_by = request.user
+            else:
+                obj.created_by = request.user
+            obj.save()
+            messages.success(request, '%s (%s) has been saved.' % (obj.__class__.__name__, obj.display_name))
+
+            return redirect(
+                reverse("app:volume")
+            )
+        else:
+            print form.errors
+
+        return self.render_to_response({"form":form})

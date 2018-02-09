@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 3:43:19 pm
-# Last Modified: Wednesday, 24th January 2018 10:26:03 am
+# Last Modified: Wednesday, 7th February 2018 7:30:38 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -18,6 +18,7 @@ from libs.view import ProtectedMixin
 from libs.datatable import Datatable
 from libs.json_response import JSONResponse
 from app.models import Facility
+from app.forms import FacilityForm
 
 class FacilityView(ProtectedMixin, TemplateView):
     template_name = "facility/index.html"
@@ -45,3 +46,44 @@ class FacilityView(ProtectedMixin, TemplateView):
 
         d = Datatable(request, qs, defer)
         return d.get_data()
+
+
+class FacilityFormView(ProtectedMixin, TemplateView):
+    template_name = "facility/form.html"
+    
+    def get(self, request):
+        edit = request.GET.get("edit")
+
+        if edit:
+            instance = Facility.objects.get(id62=edit)
+            form = FacilityForm(instance=instance)
+        else:
+            form = FacilityForm()
+
+        return self.render_to_response({"form":form})
+
+    def post(self, request):
+        edit = request.GET.get("edit")
+
+        if edit:
+            instance = Facility.objects.get(id62=edit)
+            form = FacilityForm(request.POST, instance=instance)
+        else:
+            form = FacilityForm(request.POST)
+
+        if form.is_valid():
+            obj = form.save(commit=False)
+            if edit:
+                obj.updated_by = request.user
+            else:
+                obj.created_by = request.user
+            obj.save()
+            messages.success(request, '%s (%s) has been saved.' % (obj.__class__.__name__, obj.display_name))
+
+            return redirect(
+                reverse("app:facility")
+            )
+        else:
+            print form.errors
+
+        return self.render_to_response({"form":form})
