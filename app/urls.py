@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 12:59:20 pm
-# Last Modified: Wednesday, 7th February 2018 8:17:54 pm
+# Last Modified: Tuesday, 20th February 2018 9:42:52 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^witness/form/$', WitnessFormView.as_view(), name='witness-form'),
 
     url(r'^file/$', FileView.as_view(), name='file'),
-    url(r'^file/form/$', FileView.as_view(), name='file-form'),
+    url(r'^file/form/$', FileFormView.as_view(), name='file-form'),
 
     url(r'^purchase/$', PurchaseView.as_view(), name='purchase'),
     url(r'^purchase/form/$', PurchaseView.as_view(), name='purchase-form'),

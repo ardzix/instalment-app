@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:37:22 pm
-# Last Modified: Wednesday, 7th February 2018 8:20:23 pm
+# Last Modified: Tuesday, 20th February 2018 9:45:41 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -68,4 +68,13 @@ class WitnessForm(ModelForm):
         widgets = {
             'fullname': TextInput(attrs={'class':'form-control'}),
             'id_num': TextInput(attrs={'class':'form-control'}),            
-        }       
+        }           
+
+class FileForm(ModelForm):
+    class Meta:
+        model = File
+        exclude = settings.EXCLUDE_FORM_FIELDS
+        widgets = {
+            'display_name': TextInput(attrs={'class':'form-control'}),
+            'short_name': TextInput(attrs={'class':'form-control'}),            
+        }        

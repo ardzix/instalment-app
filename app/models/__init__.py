@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Wednesday, 24th January 2018 10:41:24 am
+# Last Modified: Tuesday, 20th February 2018 9:58:37 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -91,13 +91,16 @@ class Witness(BaseModelGeneric):
 class File(BaseModelGeneric):
     display_name = models.CharField(max_length=100, verbose_name="Nama Tampinal")
     short_name = models.SlugField(max_length=100, verbose_name="Slug")
-    manager = models.FileField(blank=True, max_length=300, null=True, storage=STORAGE_FILE)
+    manager = models.FileField(blank=True, max_length=300, null=True, storage=STORAGE_FILE, verbose_name="File")
 
     def __unicode__(self):
         return self.display_name
 
     def get_url(self):
-        return self.manager.url
+        if self.manager:
+            return self.manager._get_url()
+        else:
+            return "-"
 
     class Meta:
         verbose_name = "Berkas"
