@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:37:22 pm
-# Last Modified: Tuesday, 20th February 2018 9:45:41 pm
+# Last Modified: Tuesday, 20th February 2018 10:37:11 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -78,3 +78,34 @@ class FileForm(ModelForm):
             'display_name': TextInput(attrs={'class':'form-control'}),
             'short_name': TextInput(attrs={'class':'form-control'}),            
         }        
+
+class PurchaseForm(ModelForm):
+    class Meta:
+        model = Purchase
+        exclude = settings.EXCLUDE_FORM_FIELDS
+        widgets = {
+            'customer': Select(attrs={'class':'form-control select2'}),
+            'volume': Select(attrs={'class':'form-control select2'}),
+            'witnesses': SelectMultiple(attrs={'class':'form-control select2'}),
+            'facilities': SelectMultiple(attrs={'class':'form-control select2'}),
+            'files': SelectMultiple(attrs={'class':'form-control select2'}),
+            'reg_id': TextInput(attrs={'class':'form-control'}),
+            'reg_behalf': TextInput(attrs={'class':'form-control'}),            
+            'area_wide': NumberInput(attrs={'class':'form-control'}), 
+            'down_payment': NumberInput(attrs={'class':'form-control'}), 
+            'installment_fee': NumberInput(attrs={'class':'form-control'}), 
+            'installment_total': NumberInput(attrs={'class':'form-control'}), 
+            'due_date': NumberInput(attrs={'class':'form-control'}), 
+            'notification_date': NumberInput(attrs={'class':'form-control'}), 
+        }           
+
+class InstallmentForm(ModelForm):
+    class Meta:
+        model = Installment
+        exclude = settings.EXCLUDE_FORM_FIELDS + ("customer",)
+        widgets = {
+            'purchase': Select(attrs={'class':'form-control select2'}),
+            'files': SelectMultiple(attrs={'class':'form-control select2'}),          
+            'order': NumberInput(attrs={'class':'form-control'}), 
+            'minus': NumberInput(attrs={'class':'form-control'}),
+        }       

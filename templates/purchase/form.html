@@ -1,0 +1,252 @@
+<!--
+
+Author: Arif Dzikrullah
+        ardzix@hotmail.com
+
+File Created: Tuesday, 20th February 2018 10:08:39 pm
+Last Modified: Tuesday, 20th February 2018 10:18:03 pm
+Modified By: Arif Dzikrullah (ardzix@hotmail.com)
+
+Give the best to the world
+Copyright - 2018 Ardz.Co
+-->
+
+
+{% extends "../layout/adminLTE2.html" %}
+{% load static compress %}
+
+
+{% block content %}
+<section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Form Pembelian</h3>
+                </div>
+                <form role="form" method="POST">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group required">
+                                    <label>{{form.customer.label}}</label>
+                                    {{form.customer}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{form.volume.label}}</label>
+                                    {{form.volume}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group required">
+                                    <label>{{form.witnesses.label}}</label>
+                                    {{form.witnesses}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{form.facilities.label}}</label>
+                                    {{form.facilities}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group required">
+                                    <label>{{form.files.label}}</label>
+                                    {{form.files}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group required">
+                                    <label>{{form.reg_id.label}}</label>
+                                    {{form.reg_id}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{form.reg_behalf.label}}</label>
+                                    {{form.reg_behalf}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{form.area_wide.label}}</label>
+                                    {{form.area_wide}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group required">
+                                    <label>{{form.north_perimeter.label}}</label>
+                                    {{form.north_perimeter}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{form.south_perimeter.label}}</label>
+                                    {{form.south_perimeter}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group required">
+                                    <label>{{form.east_perimeter.label}}</label>
+                                    {{form.east_perimeter}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{form.west_perimeter.label}}</label>
+                                    {{form.west_perimeter}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group required">
+                                    <label>{{form.address.label}}</label>
+                                    {{form.address}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group required">
+                                    <label>{{form.down_payment.label}}</label>
+                                    {{form.down_payment}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{form.installment_fee.label}}</label>
+                                    {{form.installment_fee}}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>{{form.installment_total.label}}</label>
+                                    {{form.installment_total}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group required">
+                                    <label>{{form.due_date.label}}</label>
+                                    {{form.due_date}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>{{form.notification_date.label}}</label>
+                                    {{form.notification_date}}
+                                </div>
+                            </div>
+                        </div
+                        
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box --> 
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+{% endblock %}
+
+
+{% block css %}
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="{% static 'backend/bootstrap/css/bootstrap.min.css' %}">
+<!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="{% static 'backend/plugins/datepicker/datepicker3.css' %}">
+    <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="{% static 'backend/plugins/timepicker/bootstrap-timepicker.min.css' %}">
+  <link rel="stylesheet" href="{% static 'backend/bootstrap/css/bootstrap.min.css' %}">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="{% static 'backend/plugins/select2/select2.min.css' %}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{% static 'backend/dist/css/AdminLTE.min.css' %}">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+   folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="{% static 'backend/dist/css/skins/_all-skins.min.css' %}">
+{% endblock %}
+
+{% block js %}
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'backend/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'backend/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'backend/dist/js/app.min.js' %}"></script>
+<!-- CK Editor -->
+<!-- <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script> -->
+
+<script src="{% static 'backend/dist/js/ckeditor/ckeditor.js' %}"></script>
+<!-- Select2 -->
+<script src="{% static 'backend/plugins/select2/select2.full.min.js' %}"></script>
+<!-- bootstrap datepicker -->
+<script src="{% static 'backend/plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<!-- bootstrap time picker -->
+<script src="{% static 'backend/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<!-- InputMask -->
+<script src="{% static 'backend/plugins/input-mask/jquery.inputmask.js' %}"></script>
+<script src="{% static 'backend/plugins/input-mask/jquery.inputmask.date.extensions.js' %}"></script>
+<script src="{% static 'backend/plugins/input-mask/jquery.inputmask.extensions.js' %}"></script>
+               
+<script>
+    var simplemde1 = new SimpleMDE({ 
+        element: document.getElementById("{{form.north_perimeter.auto_id}}")
+        })
+    var simplemde2 = new SimpleMDE({ 
+        element: document.getElementById("{{form.south_perimeter.auto_id}}")
+        })
+    var simplemde3 = new SimpleMDE({ 
+        element: document.getElementById("{{form.east_perimeter.auto_id}}")
+        })
+    var simplemde4 = new SimpleMDE({ 
+        element: document.getElementById("{{form.west_perimeter.auto_id}}")
+        })
+    var simplemde5 = new SimpleMDE({ 
+        element: document.getElementById("{{form.address.auto_id}}")
+        })
+    $(".select2").select2();
+    
+</script>
+
+{% endblock %}
+
+{% block js-top %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+{% endblock %}
