@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Tuesday, 20th February 2018 9:58:37 pm
+# Last Modified: Wednesday, 28th February 2018 10:40:05 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -130,6 +130,27 @@ class Purchase(BaseModelGeneric):
     def __unicode__(self):
         return "%s - %s" % (self.customer.__unicode__(), self.volume.__unicode__())
 
+    def save(self, *args, **kwargs):
+        sup = super(Purchase, self).save(*args, **kwargs)
+        
+        ct = ContentType.objects.get_for_model(self)
+        finance = Finance.objects.filter(content_type=ct, object_id=self.id).first()
+        value = self.down_payment
+        if not finance:
+            finance = Finance(
+                description = self.__unicode__(), 
+                content_type = ct,
+                content_model = self.__class__.__name__,
+                object_id = self.id, 
+                content_object = self
+            )
+            finance.created_by = self.created_by
+        else:
+            finance.updated_by = self.updated_by
+        finance.value = value
+        finance.save()
+
+        return sup
     class Meta:
         verbose_name = "Pembelian"
         verbose_name_plural = "Pembelian"
@@ -144,6 +165,28 @@ class Installment(BaseModelGeneric):
         
     def __unicode__(self):
         return "%s/%s - %s" % (self.order, self.purchase.installment_total, self.purchase.__unicode__())
+
+    def save(self, *args, **kwargs):
+        sup = super(Installment, self).save(*args, **kwargs)
+        
+        ct = ContentType.objects.get_for_model(self)
+        finance = Finance.objects.filter(content_type=ct, object_id=self.id).first()
+        value = (self.purchase.installment_fee - self.minus)
+        if not finance:
+            finance = Finance(
+                description = self.__unicode__(), 
+                content_type = ct,
+                content_model = self.__class__.__name__,
+                object_id = self.id, 
+                content_object = self
+            )
+            finance.created_by = self.created_by
+        else:
+            finance.updated_by = self.updated_by
+        finance.value = value
+        finance.save()
+
+        return sup
 
     class Meta:
         verbose_name = "Cicilan"

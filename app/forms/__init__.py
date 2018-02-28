@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:37:22 pm
-# Last Modified: Tuesday, 20th February 2018 10:37:11 pm
+# Last Modified: Wednesday, 28th February 2018 9:36:33 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -109,3 +109,31 @@ class InstallmentForm(ModelForm):
             'order': NumberInput(attrs={'class':'form-control'}), 
             'minus': NumberInput(attrs={'class':'form-control'}),
         }       
+
+class FinanceForm(ModelForm):
+    type = ChoiceField(
+        label="Jenis", 
+        choices=(
+                (1, 'Pengeluaran'),
+                (2, 'Pendapatan'),
+            ),
+        widget = Select(attrs={'class':'form-control select2'})
+    )
+    
+    class Meta:
+        model = Finance
+        exclude = settings.EXCLUDE_FORM_FIELDS + ("content_model", "object_id", "content_object")
+        widgets = {
+            'description': TextInput(attrs={'class':'form-control'}),
+            'value': NumberInput(attrs={'class':'form-control'}),  
+            'content_type': Select(attrs={'class':'form-control select2'}),          
+        }       
+
+class FinanceCOForm(Form):
+
+    content_object = ModelChoiceField(
+        label = "Objek",
+        queryset = None,
+        required = False,
+        widget = Select(attrs={'class':'form-control select2'})
+    )

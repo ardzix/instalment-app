@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:38:34 pm
-# Last Modified: Tuesday, 20th February 2018 10:38:33 pm
+# Last Modified: Wednesday, 28th February 2018 10:38:54 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -18,7 +18,7 @@ from django.shortcuts import redirect, reverse, get_object_or_404
 from libs.view import ProtectedMixin
 from libs.datatable import Datatable
 from libs.json_response import JSONResponse
-from app.models import Installment
+from app.models import Installment, Finance
 from app.forms import InstallmentForm
 
 class InstallmentView(ProtectedMixin, TemplateView):
@@ -82,6 +82,7 @@ class InstallmentFormView(ProtectedMixin, TemplateView):
             else:
                 obj.created_by = request.user
             obj.customer = obj.purchase.customer
+            obj.files = form.cleaned_data['files']
             obj.save()
             messages.success(request, '%s (%s) has been saved.' % (obj.__class__.__name__, obj.__unicode__()))
 

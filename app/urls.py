@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 12:59:20 pm
-# Last Modified: Tuesday, 20th February 2018 10:33:06 pm
+# Last Modified: Friday, 23rd February 2018 11:02:08 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -43,7 +43,8 @@ urlpatterns = [
     url(r'^installment/form/$', InstallmentFormView.as_view(), name='installment-form'),
 
     url(r'^finance/$', FinanceView.as_view(), name='finance'),
-    url(r'^finance/form/$', FinanceView.as_view(), name='finance-form'),
+    url(r'^finance/form/$', FinanceFormView.as_view(), name='finance-form'),
+    url(r'^finance/content_object/ajax/$', FinanceContentObjectAjaxView.as_view(), name='finance-content_object-ajax'),
 
     url(r'^$', CustomerView.as_view(), name='dashboard'),
 ]

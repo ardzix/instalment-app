@@ -117,7 +117,6 @@ class Datatable(object):
     def set_lookup_defer(self, lookup=[]):
         lookup_dict_list = []
         for l in lookup:
-            print l
             l_dict = {"lookup_field":l}
             splited_l = l.split("__")
             field = ""
@@ -187,7 +186,6 @@ class Datatable(object):
             self.data['recordsFiltered'] = self.obj.filter(qs).count()
         # if we failed to try
         except Exception as e:
-            print str(e)
             # we sent an error response to client
             return JSONResponse({'error' : 'error in search parameter', 'error detail': str(e), 'suggestion' : 'Only enable varchar data type only for search'})
 
