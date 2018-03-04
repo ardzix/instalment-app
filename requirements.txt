@@ -7,6 +7,8 @@ django-libsass==0.7
 djangorestframework==3.6.3
 django-rest-swagger==2.1.2
 pytablewriter==0.27.1
+sorl-thumbnail==12.3
+arrow==0.10.0
 
 # Deploy
 Fabric==1.13.2
