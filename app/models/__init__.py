@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Wednesday, 28th February 2018 10:40:05 pm
+# Last Modified: Sunday, 4th March 2018 5:54:53 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -111,8 +111,8 @@ class Purchase(BaseModelGeneric):
     customer = models.ForeignKey(Customer, related_name="%(app_label)s_%(class)s_customer", verbose_name="Pelanggan")
     volume = models.ForeignKey(Volume, related_name="%(app_label)s_%(class)s_volume")
     witnesses = models.ManyToManyField(Witness, related_name="%(app_label)s_%(class)s_witnesses", verbose_name="Saksi")
-    facilities = models.ManyToManyField(Facility, related_name="%(app_label)s_%(class)s_facilities", verbose_name="Fasilitas")
-    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files", verbose_name="Berkas")
+    facilities = models.ManyToManyField(Facility, related_name="%(app_label)s_%(class)s_facilities", blank=True, null=True, verbose_name="Fasilitas")
+    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files", blank=True, null=True, verbose_name="Berkas")
     reg_id = models.CharField(max_length=100, verbose_name="No Induk Akte")
     reg_behalf = models.CharField(max_length=100, verbose_name="Akte Atas Nama")
     area_wide = models.PositiveIntegerField(default=0, verbose_name="Luas Tanah")
@@ -159,7 +159,7 @@ class Purchase(BaseModelGeneric):
 class Installment(BaseModelGeneric):
     purchase = models.ForeignKey(Purchase, related_name="%(app_label)s_%(class)s_purchase", verbose_name="Pembelian")
     customer = models.ForeignKey(Customer, related_name="%(app_label)s_%(class)s_customer", verbose_name="Pelanggan")
-    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files", verbose_name="Berkas")
+    files = models.ManyToManyField(File, related_name="%(app_label)s_%(class)s_files", verbose_name="Berkas", blank=True, null=True)
     order = models.PositiveIntegerField(default=0, verbose_name="Cicilan Ke")
     minus = models.PositiveIntegerField(default=0, verbose_name="Kekurangan")
         

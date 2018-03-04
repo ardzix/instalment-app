@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:38:34 pm
-# Last Modified: Wednesday, 28th February 2018 10:38:54 pm
+# Last Modified: Sunday, 4th March 2018 5:53:34 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -82,6 +82,7 @@ class InstallmentFormView(ProtectedMixin, TemplateView):
             else:
                 obj.created_by = request.user
             obj.customer = obj.purchase.customer
+            obj.save()
             obj.files = form.cleaned_data['files']
             obj.save()
             messages.success(request, '%s (%s) has been saved.' % (obj.__class__.__name__, obj.__unicode__()))
