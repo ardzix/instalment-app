@@ -1,31 +1,47 @@
 <li class="treeview">
     <a href="{% url 'app:dashboard' %}"><i class="fa fa-home "></i><span>Dashboard</span></a>
 </li>
+{% if request.user.is_superuser or 'app:customer' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:customer' %}"><i class="fa fa-user "></i><span>Pelanggan</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:facility' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:facility' %}"><i class="fa fa-gamepad "></i><span>Fasilitas</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:volume' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:volume' %}"><i class="fa fa-object-group  "></i><span>Volume</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:witness' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:witness' %}"><i class="fa fa-users  "></i><span>Saksi</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:file' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:file' %}"><i class="fa fa-file  "></i><span>File</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:purchase' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:purchase' %}"><i class="fa fa-dollar  "></i><span>Pembelian</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:installment' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:installment' %}"><i class="fa fa-credit-card   "></i><span>Cicilan</span></a>
 </li>
+{% endif %}
+{% if request.user.is_superuser or 'app:finance' in request.model_access %}    
 <li class="treeview">
     <a href="{% url 'app:finance' %}"><i class="fa fa-line-chart   "></i><span>Keuangan</span></a>
 </li>
-
+{% endif %}
+{% if request.user.is_superuser %}
 <li class="treeview">
     <a href="#">
       <i class="fa fa-cogs"></i> <span>Superuser</span>
@@ -39,3 +55,4 @@
       <li><a href="{% url 'superuser:group' %}"><i class="fa fa-circle-o"></i> Group</a></li>
     </ul>
 </li>
+{% endif %}
