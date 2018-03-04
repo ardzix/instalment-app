@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Wednesday, 10th January 2018 11:38:17 pm
-# Last Modified: Sunday, 4th March 2018 5:54:53 pm
+# Last Modified: Sunday, 4th March 2018 6:26:29 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -98,7 +98,7 @@ class File(BaseModelGeneric):
 
     def get_url(self):
         if self.manager:
-            return self.manager._get_url()
+            return self.manager.url
         else:
             return "-"
 
