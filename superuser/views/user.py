@@ -7,7 +7,7 @@
 #         http://ardz.xyz
 # 
 # File Created: Thursday, 1st March 2018 1:56:43 pm
-# Last Modified: Saturday, 3rd March 2018 8:17:58 pm
+# Last Modified: Sunday, 4th March 2018 6:03:42 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Hand-crafted & Made with Love
@@ -75,6 +75,7 @@ class UserFormView(ProtectedMixin, TemplateView):
             if request.POST.get("password") and request.POST.get("password") != "":
                 user.set_password(request.POST.get("password"))
             
+            user.save()
             user.groups = form.cleaned_data['groups']
             user.save()
             messages.success(request, 'User (%s) has been saved.' % user.username)
