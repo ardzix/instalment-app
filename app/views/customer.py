@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 1:01:02 pm
-# Last Modified: Thursday, 25th January 2018 11:55:45 am
+# Last Modified: Saturday, 10th March 2018 4:10:43 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -15,8 +15,8 @@ from django.contrib import messages
 from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from libs.view import ProtectedMixin
-from libs.datatable import Datatable
 from libs.json_response import JSONResponse
+from datatable import Datatable
 from app.models import Customer
 from app.forms import CustomerForm, UserForm
 from datetime import datetime

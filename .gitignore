@@ -4,5 +4,5 @@
 *.DS_Store
 app/migrations/*
 media/*
-project/settings.py
+*/settings.py
 

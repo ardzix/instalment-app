@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:34:25 pm
-# Last Modified: Tuesday, 20th February 2018 10:27:47 pm
+# Last Modified: Saturday, 10th March 2018 4:13:08 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -16,7 +16,7 @@ from django.views.generic import TemplateView
 from django.contrib import messages
 from django.shortcuts import redirect, reverse, get_object_or_404
 from libs.view import ProtectedMixin
-from libs.datatable import Datatable
+from datatable import Datatable
 from libs.json_response import JSONResponse
 from app.models import Purchase
 from app.forms import PurchaseForm

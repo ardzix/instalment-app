@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Sunday, 14th January 2018 3:43:47 pm
-# Last Modified: Wednesday, 28th February 2018 10:43:55 pm
+# Last Modified: Saturday, 10th March 2018 4:12:55 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -17,7 +17,7 @@ from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from libs.view import ProtectedMixin
-from libs.datatable import Datatable
+from datatable import Datatable
 from libs.json_response import JSONResponse
 from app.models import *
 from app.forms import FinanceForm, FinanceCOForm
