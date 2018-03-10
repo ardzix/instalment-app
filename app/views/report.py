@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Saturday, 10th March 2018 4:19:59 pm
-# Last Modified: Saturday, 10th March 2018 6:48:45 pm
+# Last Modified: Sunday, 11th March 2018 12:09:52 am
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -60,7 +60,7 @@ class FinanceReportView(ProtectedMixin, TemplateView):
                 v.id62, 
                 v.created_at, 
                 v.description, 
-                "Rp. "+"{:,}".format(v.value), 
+                v.value, 
                 v.content_object
             ]
             table['rows'].append(row)
