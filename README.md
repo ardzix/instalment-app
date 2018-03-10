@@ -7,7 +7,7 @@ _see requirements.txt for dependency required_
 
 - Go to specified directory which the app will be installed
 
-- Clone panel app from repository
+- Clone app from repository
 `git clone https://github.com/ardzix/instalment-app.git`
 
 - Create settings `project/settings.py` file based on `project/settings_example.py`
