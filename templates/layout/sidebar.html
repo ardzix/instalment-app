@@ -56,3 +56,16 @@
     </ul>
 </li>
 {% endif %}
+{% if request.user.is_superuser or 'app:finance' in request.model_access %}   
+<li class="treeview">
+    <a href="#">
+      <i class="fa fa-table"></i> <span>laporan</span>
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{% url 'app:finance-report' %}"><i class="fa fa-circle-o"></i> Keuangan</a></li>
+    </ul>
+</li>
+{% endif %}

@@ -4,7 +4,7 @@
 #         ardzix@hotmail.com
 # 
 # File Created: Thursday, 11th January 2018 12:59:20 pm
-# Last Modified: Friday, 23rd February 2018 11:02:08 am
+# Last Modified: Saturday, 10th March 2018 5:09:37 pm
 # Modified By: Arif Dzikrullah (ardzix@hotmail.com)
 # 
 # Give the best to the world
@@ -19,6 +19,7 @@ from app.views.file import *
 from app.views.purchase import *
 from app.views.installment import *
 from app.views.finance import *
+from app.views.report import *
 
 urlpatterns = [
     url(r'^customer/$', CustomerView.as_view(), name='customer'),
@@ -45,6 +46,9 @@ urlpatterns = [
     url(r'^finance/$', FinanceView.as_view(), name='finance'),
     url(r'^finance/form/$', FinanceFormView.as_view(), name='finance-form'),
     url(r'^finance/content_object/ajax/$', FinanceContentObjectAjaxView.as_view(), name='finance-content_object-ajax'),
+
+    url(r'^report/finance/$', FinanceReportView.as_view(), name='finance-report'),
+
 
     url(r'^$', CustomerView.as_view(), name='dashboard'),
 ]

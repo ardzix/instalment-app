@@ -1,0 +1,215 @@
+<!--
+
+Author: Arif Dzikrullah
+        ardzix@hotmail.com
+
+File Created: Thursday, 11th January 2018 3:55:19 pm
+Last Modified: Saturday, 10th March 2018 6:27:24 pm
+Modified By: Arif Dzikrullah (ardzix@hotmail.com)
+
+Give the best to the world
+Copyright - 2018 Ardz.Co
+-->
+
+
+{% extends "../layout/adminLTE2.html" %}
+{% load static compress %}
+
+{% block breadcumb %}
+<li class="active">Laporan {{table.title}}</li>
+{% endblock %}
+
+{% block content_title %}
+Laporan
+{% endblock %}
+
+{% block content %}
+<section class="content">
+        <div class="row">
+          <div class="col-xs-12"><div class="box box-info">
+              <div class="box-header">
+                <h3 class="box-title col-sm-3" >Tabel Laporan {{table.title}}</h3>
+                <div class="pull-right">
+                    <div class="col-sm-4" >
+                        From <br>
+                        <input type="text" id="start_date" class="form-control datepicker">
+                    </div>
+                    <div class="col-sm-4" >
+                        To <br>
+                        <input type="text" id="end_date" class="form-control datepicker">
+                    </div>
+                    <div class="col-sm-4 btn-group  pull-right" >
+                        <button type="button" class="btn btn-instagram" style="margin-right:10px">
+                            <i class="fa fa-download"></i>
+                            &nbsp;Export
+                        </button>
+                    </div>
+                </div>
+              </row>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table id="mainTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            {% for th in table.head %}
+                            <th>{{th}}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tr in table.rows %}
+                        <tr>
+                            {% for td in tr %}
+                            <td>{{td}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                 
+                    <tfoot>
+                        <tr>
+                            {% for tf in table.foot %}
+                            <th>{{tf}}</th>
+                            {% endfor %}
+                        </tr>
+                    </tfoot> 
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+
+{% endblock %}
+
+
+{% block css %}
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet" href="{% static 'backend/bootstrap/css/bootstrap.min.css' %}">
+<!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="{% static 'backend/plugins/datepicker/datepicker3.css' %}">
+    <!-- Bootstrap time Picker -->
+  <link rel="stylesheet" href="{% static 'backend/plugins/timepicker/bootstrap-timepicker.min.css' %}">
+  <link rel="stylesheet" href="{% static 'backend/bootstrap/css/bootstrap.min.css' %}">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="{% static 'backend/plugins/select2/select2.min.css' %}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{% static 'backend/dist/css/AdminLTE.min.css' %}">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+   folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="{% static 'backend/dist/css/skins/_all-skins.min.css' %}">
+{% endblock %}
+
+{% block js %}
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'backend/plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'backend/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'backend/dist/js/app.min.js' %}"></script>
+<!-- CK Editor -->
+<!-- <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script> -->
+
+<script src="{% static 'backend/dist/js/ckeditor/ckeditor.js' %}"></script>
+<!-- Select2 -->
+<script src="{% static 'backend/plugins/select2/select2.full.min.js' %}"></script>
+<!-- bootstrap datepicker -->
+<script src="{% static 'backend/plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<!-- bootstrap time picker -->
+<script src="{% static 'backend/plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<!-- InputMask -->
+<script src="{% static 'backend/plugins/input-mask/jquery.inputmask.js' %}"></script>
+<script src="{% static 'backend/plugins/input-mask/jquery.inputmask.date.extensions.js' %}"></script>
+<script src="{% static 'backend/plugins/input-mask/jquery.inputmask.extensions.js' %}"></script>
+       
+<script>
+    $('.datepicker').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd'
+      });
+
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    }
+
+    function replaceUrlParam(url, paramName, paramValue){
+        var pattern = new RegExp('(\\?|\\&)('+paramName+'=).*?(&|$)')
+        var newUrl=url
+        if(url.search(pattern)>=0){
+            newUrl = url.replace(pattern,'$1$2' + paramValue + '$3');
+        }
+        else{
+            newUrl = newUrl + (newUrl.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue
+        }
+        return newUrl
+    }
+    
+    $(document).ready(function(){
+
+        if (getUrlParameter("start_date")){
+            $("#start_date").val(getUrlParameter("start_date"))
+        }
+
+        if (getUrlParameter("end_date")){
+            $("#end_date").val(getUrlParameter("end_date"))
+        }
+
+        $('.datepicker').change(function(){
+            var start_date = $("#start_date").val()
+            var end_date = $("#end_date").val()
+
+            if (end_date=="") {
+                end_date = "null"
+            }
+            if (start_date=="") {
+                start_date = "null"
+            }
+
+            var url = window.location.toString();
+            if (getUrlParameter("start_date")){
+                url = replaceUrlParam(url, 'start_date', start_date)
+            }else{
+                if(url.includes('?')) {
+                    url = url+"&start_date="+start_date
+                }else{
+                    url = url+"?start_date="+start_date
+                }
+            }
+
+            if (getUrlParameter("end_date")){
+                url = replaceUrlParam(url, 'end_date', end_date)
+            }else{
+                if(url.includes('?')) {
+                    url = url+"&end_date="+end_date
+                }else{
+                    url = url+"?end_date="+end_date
+                }
+            }
+
+            document.location.href = url
+            
+        })
+    })
+</script>
+{% endblock %}
