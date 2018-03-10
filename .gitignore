@@ -5,4 +5,4 @@
 app/migrations/*
 media/*
 */settings.py
-
+.vscode
